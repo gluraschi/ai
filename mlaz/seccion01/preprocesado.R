@@ -39,5 +39,5 @@ View(training_set)
 View(testing_set)
 
 # escalado de valores
-training_set[,2:3] = scale(training_set)
-testing_set[,2:3] = scale(testing_set)
+training_set[,2:3] = scale(training_set[,2:3])
+testing_set[,2:3] = scale(testing_set[,2:3])
