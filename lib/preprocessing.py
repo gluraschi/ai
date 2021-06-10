@@ -18,7 +18,7 @@ def vectorizeCsv(file):
     en la última columna del csv.'''
     
     # importar el csv a la variable dataset
-    dataset = pd.read_csv("Data.csv")
+    dataset = pd.read_csv(file)
     
     # se crea una matriz con todos los valores salvo la última columna del csv
     X = dataset.iloc[:,:-1].values
@@ -50,7 +50,7 @@ def fillNaN(matrix, strategy = "mean"):
     
     return matrix
 
-def createCategoricalFeatures(matrix, feature):
+def createDummyFeatures(matrix, feature, removeOneDummy=True):
     '''Crea dimensiones categóricas de acuerdo a la dimensión enviada'''
     
     # convierte los textos a valores en la misma dimensión
@@ -60,6 +60,10 @@ def createCategoricalFeatures(matrix, feature):
     # cada dimensión va a tener los valores 0 o 1 como flag booleano
     one_hot_encoder = OneHotEncoder(categorical_features=[feature])
     matrix = one_hot_encoder.fit_transform(matrix).toarray()
+    
+    # evitar la trampa de las variables ficticias
+    if (removeOneDummy == True):
+        matrix = matrix[:,1:]
     
     return matrix
     
